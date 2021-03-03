@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=martex Core
+Comment=martex P2P Cryptocurrency
+Exec=martex-qt %u
+Terminal=false
+Type=Application
+Icon=martex128
+MimeType=x-scheme-handler/martex;
+Categories=Office;Finance;
+StartupWMClass=martex-qt
+Name[en_US]=martex-qt.desktop
