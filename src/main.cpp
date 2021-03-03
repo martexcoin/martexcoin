@@ -1663,19 +1663,13 @@ int64_t GetBlockValue(int nHeight)
     }
 
     if(nHeight >= 2500001 && !IsEcoFundBlock(nHeight)) {
-        nSubsidy = nSubsidy / 100 * 80;
+        nSubsidy = nBlockReward / 100 * 90;
     }
 
     if(IsEcoFundBlock(nHeight)) {
         LogPrintf("GetBlockValue(): this is a ecofund block\n");
         nSubsidy = ((nSubsidy * 10900) / 100) * 20;
     }
-
-    // Hard fork to reduce the block reward by 10 extra percent (allowing budget/superblocks)
-    bool fSuperblockPartOnly = (nHeight > Params().GetConsensus().nBudgetPaymentsStartBlock);
-    CAmount nSuperblockPart = fSuperblockPartOnly ? nSubsidy/10 : 0;
-
-    return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart;
 
 }
 
