@@ -1668,9 +1668,10 @@ int64_t GetBlockValue(int nHeight)
 
     if(IsEcoFundBlock(nHeight)) {
         LogPrintf("GetBlockValue(): this is a ecofund block\n");
-        nSubsidy = ((nSubsidy * 10900) / 100) * 20;
+        nSubsidy = ((nBlockReward * 10900) / 100) * 20;
     }
 
+    return nSubsidy;
 }
 
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount)
@@ -5083,7 +5084,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
             pfrom->cleanSubVer == "/MarteX Core:3.0.4.2/" || pfrom->cleanSubVer == "/MarteX Core:3.0.5.1/" || pfrom->cleanSubVer == "/MarteX Core:3.0.6.1/" ||
             pfrom->cleanSubVer == "/MarteX Core:4.0.0/" || pfrom->cleanSubVer == "/MarteX Core:4.0.1/" || pfrom->cleanSubVer == "/MarteX Core:4.0.2/" ||
             pfrom->cleanSubVer == "/MarteX Core:4.0.2.1/" || pfrom->cleanSubVer == "/MarteX Core:4.0.2.2/" || pfrom->cleanSubVer == "/MarteX Core:4.0.3.1/" ||
-            pfrom->cleanSubVer == "/MarteX Core:4.0.3.2/" || pfrom->cleanSubVer == "/MarteX Core:4.0.4.3/" )
+            pfrom->cleanSubVer == "/MarteX Core:4.0.3.2/" )
         {
             version_old = "< 5.0.1.3";
             // disconnect from peers older than this version
