@@ -3305,6 +3305,8 @@ bool CheckColdStakeFreeOutput(const CTransaction& tx, const int nHeight)
 
     const unsigned int outs = tx.vout.size();
     const CTxOut& lastOut = tx.vout[outs-1];
+    const CTxOut& lastOut2 = tx.vout[outs-2];
+    LogPrintf("CheckColdStakeFreeOutput - outs: %i, lastOut.nValue(MN/Budget): %d, lastOut2.nValue(Staker): %d\n", outs, FormatMoney(lastOut.nValue).c_str(), FormatMoney(lastOut2.nValue).c_str());
     if (outs >=3 && lastOut.scriptPubKey != tx.vout[outs-2].scriptPubKey) {
         // last output can either be a mn reward or a budget payment
         if (lastOut.nValue == GetMasternodePayment(nHeight, GetBlockValue(nHeight), 0))
