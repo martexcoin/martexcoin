@@ -16,7 +16,7 @@
 #include "fasttx.h"    // mapTxLockReq
 #include "util.h"
 #include "utilmoneystr.h"
-#include "zpivchain.h"
+#include "zmxtchain.h"
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/thread.hpp>

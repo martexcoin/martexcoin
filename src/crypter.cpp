@@ -503,7 +503,7 @@ bool CCryptoKeyStore::AddDeterministicSeed(const uint256& seed)
             //attempt encrypt
             if (EncryptSecret(vMasterKey, kmSeed, hashSeed, vchSeedSecret)) {
                 //write to wallet with hashSeed as unique key
-                if (db.WriteZPIVSeed(hashSeed, vchSeedSecret)) {
+                if (db.WriteZMXTSeed(hashSeed, vchSeedSecret)) {
                     return true;
                 }
             }
@@ -511,12 +511,12 @@ bool CCryptoKeyStore::AddDeterministicSeed(const uint256& seed)
         }
         strErr = "save since wallet is locked";
     } else { //wallet not encrypted
-        if (db.WriteZPIVSeed(hashSeed, ToByteVector(seed))) {
+        if (db.WriteZMXTSeed(hashSeed, ToByteVector(seed))) {
             return true;
         }
-        strErr = "save zpivseed to wallet";
+        strErr = "save zmxtseed to wallet";
     }
-                //the use case for this is no password set seed, mint dzPIV,
+                //the use case for this is no password set seed, mint dzMXT,
 
     return error("s%: Failed to %s\n", __func__, strErr);
 }
@@ -531,7 +531,7 @@ bool CCryptoKeyStore::GetDeterministicSeed(const uint256& hashSeed, uint256& see
 
             std::vector<unsigned char> vchCryptedSeed;
             //read encrypted seed
-            if (db.ReadZPIVSeed(hashSeed, vchCryptedSeed)) {
+            if (db.ReadZMXTSeed(hashSeed, vchCryptedSeed)) {
                 uint256 seedRetrieved = uint256S(ReverseEndianString(HexStr(vchCryptedSeed)));
                 //this checks if the hash of the seed we just read matches the hash given, meaning it is not encrypted
                 //the use case for this is when not crypted, seed is set, then password set, the seed not yet crypted in memory
@@ -552,7 +552,7 @@ bool CCryptoKeyStore::GetDeterministicSeed(const uint256& hashSeed, uint256& see
     } else {
         std::vector<unsigned char> vchSeed;
         // wallet not crypted
-        if (db.ReadZPIVSeed(hashSeed, vchSeed)) {
+        if (db.ReadZMXTSeed(hashSeed, vchSeed)) {
             seedOut = uint256S(ReverseEndianString(HexStr(vchSeed)));
             return true;
         }

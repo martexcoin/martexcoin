@@ -40,9 +40,9 @@
 #include "util.h"
 #include "utilmoneystr.h"
 #include "validationinterface.h"
-#include "zpivchain.h"
+#include "zmxtchain.h"
 
-#include "zpiv/zerocoin.h"
+#include "zmxt/zerocoin.h"
 #include "libzerocoin/Denominations.h"
 #include <sstream>
 
@@ -2368,7 +2368,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     }
 
     // Track zMXT money supply in the block index
-    if (!UpdateZPIVSupply(block, pindex))
+    if (!UpdateZMXTSupply(block, pindex))
         return state.DoS(100, error("%s: Failed to calculate new zMXT supply for block=%s height=%d", __func__,
                                     block.GetHash().GetHex(), pindex->nHeight), REJECT_INVALID);
 

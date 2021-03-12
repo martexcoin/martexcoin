@@ -20,14 +20,14 @@
 #include "pairresult.h"
 #include "primitives/block.h"
 #include "primitives/transaction.h"
-#include "zpiv/zerocoin.h"
+#include "zmxt/zerocoin.h"
 #include "guiinterface.h"
 #include "util.h"
 #include "util/memory.h"
 #include "validationinterface.h"
 #include "wallet/wallet_ismine.h"
 #include "wallet/walletdb.h"
-#include "zpiv/zpivmodule.h"
+#include "zmxt/zmxtmodule.h"
 
 #include <algorithm>
 #include <map>

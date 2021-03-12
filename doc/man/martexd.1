@@ -88,7 +88,7 @@ Reindex the accumulator database on startup
 .HP
 \fB\-reindexmoneysupply\fR
 .IP
-Reindex the PIV and zPIV money supply statistics on startup
+Reindex the MXT and zMXT money supply statistics on startup
 .HP
 \fB\-resync\fR
 .IP
@@ -263,7 +263,7 @@ Set key pool size to <n> (default: 100)
 .HP
 \fB\-paytxfee=\fR<amt>
 .IP
-Fee (in PIV/kB) to add to transactions you send (default: 0.00)
+Fee (in MXT/kB) to add to transactions you send (default: 0.00)
 .HP
 \fB\-rescan\fR
 .IP
@@ -373,7 +373,7 @@ Prepend debug output with timestamp (default: 1)
 .HP
 \fB\-minrelaytxfee=\fR<amt>
 .IP
-Fees (in PIV/Kb) smaller than this are considered zero fee for relaying
+Fees (in MXT/Kb) smaller than this are considered zero fee for relaying
 (default: 0.0001)
 .HP
 \fB\-printtoconsole\fR
@@ -399,13 +399,13 @@ Staking options:
 .IP
 Enable staking functionality (0\-1, default: 1)
 .HP
-\fB\-pivstake=\fR<n>
+\fB\-mxtstake=\fR<n>
 .IP
-Enable or disable staking functionality for PIV inputs (0\-1, default: 1)
+Enable or disable staking functionality for MXT inputs (0\-1, default: 1)
 .HP
-\fB\-zpivstake=\fR<n>
+\fB\-zmxtstake=\fR<n>
 .IP
-Enable or disable staking functionality for zPIV inputs (0\-1, default:
+Enable or disable staking functionality for zMXT inputs (0\-1, default:
 1)
 .HP
 \fB\-reservebalance=\fR<amt>
@@ -457,14 +457,14 @@ Percentage of automatically minted Zerocoin (1\-100, default: 10)
 Preferred Denomination for automatically minted Zerocoin
 (1/5/10/50/100/500/1000/5000), 0 for no preference. default: 0)
 .HP
-\fB\-backupzpiv=\fR<n>
+\fB\-backupzmxt=\fR<n>
 .IP
-Enable automatic wallet backups triggered after each zPIV minting (0\-1,
+Enable automatic wallet backups triggered after each zMXT minting (0\-1,
 default: 1)
 .HP
-\fB\-zpivbackuppath=\fR<dir|file>
+\fB\-zmxtbackuppath=\fR<dir|file>
 .IP
-Specify custom backup path to add a copy of any automatic zPIV backup.
+Specify custom backup path to add a copy of any automatic zMXT backup.
 If set as dir, every backup generates a timestamped file. If set as
 file, will rewrite to that file every backup. If backuppath is set as
 well, 4 backups will happen
@@ -560,7 +560,7 @@ Copyright (C) 2009-2018 The Bitcoin Core Developers
 
 Copyright (C) 2014-2018 The Dash Core Developers
 
-Copyright (C) 2015-2018 The PIVX Core Developers
+Copyright (C) 2015-2018 The MARTEX Core Developers
 
 This is experimental software.
 

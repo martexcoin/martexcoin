@@ -468,7 +468,7 @@ SOURCES += src/activemasternode.cpp \
            src/qt/csvmodelwriter.cpp \
            src/qt/anonsendconfig.cpp \
            src/qt/martex.cpp \
-           src/qt/pivxstrings.cpp \
+           src/qt/martexstrings.cpp \
            src/qt/editaddressdialog.cpp \
            src/qt/guiutil.cpp \
            src/qt/intro.cpp \

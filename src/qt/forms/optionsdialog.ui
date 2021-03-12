@@ -430,8 +430,8 @@ https://www.transifex.com/pivx-project/pivx-project-translations</string>
         </layout>
        </item>
        <item>
-        <widget class="QWidget" name="verticalZpivDisplayWidget" native="true">
-         <layout class="QVBoxLayout" name="verticalZpivDisplayLayout">
+        <widget class="QWidget" name="verticalZmxtDisplayWidget" native="true">
+         <layout class="QVBoxLayout" name="verticalZmxtDisplayLayout">
           <property name="margin">
            <number>0</number>
           </property>

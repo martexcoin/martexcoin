@@ -8,10 +8,10 @@
 #include "consensus/consensus.h"
 #include "main.h"
 #include "script/interpreter.h"
-#include "zpivchain.h"
+#include "zmxtchain.h"
 
 // Public coin spend
-bool RecalculatePIVSupply(int nHeightStart, bool fSkipZpiv = true);
-bool UpdateZPIVSupply(const CBlock& block, CBlockIndex* pindex);
+bool RecalculatePIVSupply(int nHeightStart, bool fSkipZmxt = true);
+bool UpdateZMXTSupply(const CBlock& block, CBlockIndex* pindex);
 
 #endif //PIVX_CONSENSUS_ZEROCOIN_VERIFY_H

@@ -11,7 +11,7 @@
 #include "main.h"
 #include "txdb.h"
 
-bool RecalculatePIVSupply(int nHeightStart, bool fSkipZpiv)
+bool RecalculatePIVSupply(int nHeightStart, bool fSkipZmxt)
 {
     const Consensus::Params& consensus = Params().GetConsensus();
     const int chainHeight = chainActive.Height();
@@ -66,8 +66,8 @@ bool RecalculatePIVSupply(int nHeightStart, bool fSkipZpiv)
         nSupplyPrev = pindex->nMoneySupply;
 
         // Rewrite zMXT supply too
-        if (!fSkipZpiv && pindex->nHeight >= consensus.height_start_ZC) {
-            UpdateZPIVSupply(block, pindex);
+        if (!fSkipZmxt && pindex->nHeight >= consensus.height_start_ZC) {
+            UpdateZMXTSupply(block, pindex);
         }
 
         assert(pblocktree->WriteBlockIndex(CDiskBlockIndex(pindex)));
@@ -84,7 +84,7 @@ bool RecalculatePIVSupply(int nHeightStart, bool fSkipZpiv)
     return true;
 }
 
-bool UpdateZPIVSupply(const CBlock& block, CBlockIndex* pindex)
+bool UpdateZMXTSupply(const CBlock& block, CBlockIndex* pindex)
 {
     const Consensus::Params& consensus = Params().GetConsensus();
     if (pindex->nHeight < consensus.height_start_ZC)
