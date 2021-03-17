@@ -83,7 +83,7 @@ bool CMasternodeConfig::read(std::string& strErr)
         }
 
         if (Params().NetworkID() == CBaseChainParams::MAIN) {
-            if (port != Params().GetDefaultPort()) {
+            if (port != Params().GetDefaultPort() && !Params().AllowMultiplePorts()) {
                 strErr = _("Invalid port detected in masternode.conf") + "\n" +
                          strprintf(_("Line: %d"), linenumber) + "\n\"" + line + "\"" + "\n" +
                          _("(must be 51315 for mainnet)");

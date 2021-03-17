@@ -69,6 +69,9 @@ public:
     /** Skip proof-of-work check: allow mining of any difficulty block */
     bool SkipProofOfWorkCheck() const { return fSkipProofOfWorkCheck; }
 
+    /** Allow nodes with the same address and multiple ports */
+    bool AllowMultiplePorts() const { return fAllowMultiplePorts; }
+
     /** Return the BIP70 network string (main, test or regtest) */
     std::string NetworkIDString() const { return strNetworkID; }
     const std::vector<CDNSSeedData>& DNSSeeds() const { return vSeeds; }
@@ -98,6 +101,7 @@ protected:
     int nExtCoinType;
     std::vector<CAddress> vFixedSeeds;
     bool fSkipProofOfWorkCheck;
+    bool fAllowMultiplePorts;
 };
 
 /**

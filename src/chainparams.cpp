@@ -242,6 +242,7 @@ public:
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 	fSkipProofOfWorkCheck = true;
+	fAllowMultiplePorts = true;
     }
 
     const Checkpoints::CCheckpointData& Checkpoints() const
@@ -354,6 +355,7 @@ public:
 
         convertSeed6(vFixedSeeds, pnSeed6_test, ARRAYLEN(pnSeed6_test));
 	fSkipProofOfWorkCheck = true;
+	fAllowMultiplePorts = true;
     }
 
     const Checkpoints::CCheckpointData& Checkpoints() const
@@ -448,6 +450,7 @@ public:
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
+	fAllowMultiplePorts = true;
     }
 
     const Checkpoints::CCheckpointData& Checkpoints() const

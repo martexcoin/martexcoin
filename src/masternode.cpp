@@ -481,7 +481,7 @@ bool CMasternodeBroadcast::CheckDefaultPort(std::string strService, std::string&
     CService service = CService(strService);
     int nDefaultPort = Params().GetDefaultPort();
 
-    if (service.GetPort() != nDefaultPort) {
+    if (service.GetPort() != nDefaultPort && !Params().AllowMultiplePorts()) {
         strErrorRet = strprintf("Invalid port %u for masternode %s, only %d is supported on %s-net.",
                                         service.GetPort(), strService, nDefaultPort, Params().NetworkIDString());
         LogPrint("masternode", "%s - %s\n", strContext, strErrorRet);
@@ -541,7 +541,7 @@ bool CMasternodeBroadcast::CheckAndUpdate(int& nDos)
     }
 
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
-        if (addr.GetPort() != Params().GetDefaultPort()) return false;
+        if (addr.GetPort() != Params().GetDefaultPort() && !Params().AllowMultiplePorts()) return false;
     } else if (addr.GetPort() == Params().GetDefaultPort())
         return false;
 
