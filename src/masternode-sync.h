@@ -81,6 +81,7 @@ public:
     bool IsMasternodeListSynced();
     bool IsBlockchainSynced();
     void ClearFulfilledRequest();
+    bool IsBlockchainSyncedReadOnly() const;
 };
 
 #endif

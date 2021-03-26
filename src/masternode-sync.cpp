@@ -80,6 +80,11 @@ bool CMasternodeSync::IsBlockchainSynced()
     return true;
 }
 
+bool CMasternodeSync::IsBlockchainSyncedReadOnly() const
+{
+    return fBlockchainSynced;
+}
+
 void CMasternodeSync::Reset()
 {
     fBlockchainSynced = false;
