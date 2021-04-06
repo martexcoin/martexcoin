@@ -54,12 +54,21 @@ share/qt/Info.plist
 contrib/devtools/split-debug.sh
 
 src/univalue/gen
+src/univalue/pc/libunivalue-uninstalled.pc
+src/univalue/pc/libunivalue.pc
+src/univalue/stamp-h1
+src/univalue/univalue-config.h
+src/univalue/univalue-config.h.in
 
 src/qt/*.moc
 src/qt/moc_*.cpp
 src/qt/forms/ui_*.h
 
 src/qt/test/moc*.cpp
+
+depends/built/*
+depends/sources/*
+depends/x86_64-pc-linux-gnu/*
 
 .deps
 .dirstamp
