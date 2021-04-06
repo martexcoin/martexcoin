@@ -238,7 +238,7 @@ public:
     //TODO move to private after createwalletfromfile has been backported
     void MarkPreSplitKeys();
 
-    static const int DEFAULT_STAKE_SPLIT_THRESHOLD = 2000;
+    static const int DEFAULT_STAKE_SPLIT_THRESHOLD = 500;
 
     bool StakeableCoins(std::vector<COutput>* pCoins = nullptr);
     bool IsCollateralAmount(CAmount nInputAmount) const;
