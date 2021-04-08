@@ -40,6 +40,7 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample, int nOffsetLimit)
 {
     LOCK(cs_nTimeOffset);
     // Ignore duplicates (Except on regtest where all nodes have the same ip)
+    static int nMaxTimeAdjustment = GetArg("-maxtimeadjustment", DEFAULT_MAX_TIME_ADJUSTMENT);
     static std::set<CNetAddr> setKnown;
     if (setKnown.size() == BITCOIN_TIMEDATA_MAX_SAMPLES)
         return;
@@ -72,15 +73,28 @@ void AddTimeData(const CNetAddr& ip, int64_t nOffsetSample, int nOffsetLimit)
         int64_t nMedian = vTimeOffsets.median();
         std::vector<int64_t> vSorted = vTimeOffsets.sorted();
         // Only let other nodes change our time by so much
-        if (abs64(nMedian) < nOffsetLimit) {
+        if (abs64(nMedian) <= nMaxTimeAdjustment) {
             nTimeOffset = nMedian;
             strMiscWarning = "";
         } else {
-            nTimeOffset = (nMedian > 0 ? 1 : -1) * nOffsetLimit;
-            std::string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong MarteX Core will not work properly.");
-            strMiscWarning = strMessage;
-            LogPrintf("*** %s\n", strMessage);
-            uiInterface.ThreadSafeMessageBox(strMessage, "", CClientUIInterface::MSG_ERROR);
+            nTimeOffset = 0;
+
+            static bool fDone;
+            if (!fDone) {
+                // If nobody has a time different than ours but within 5 minutes of ours, give a warning
+                bool fMatch = false;
+                for (const int64_t nOffset : vSorted) {
+                    if (nOffset != 0 && nOffset > -5 * 60 && nOffset < 5 * 60) fMatch = true;
+                }
+
+                if (!fMatch) {
+                    fDone = true;
+	            std::string strMessage = _("Warning: Please check that your computer's date and time are correct! If your clock is wrong MarteX Core will not work properly.");
+	            strMiscWarning = strMessage;
+	            LogPrintf("*** %s\n", strMessage);
+	            uiInterface.ThreadSafeMessageBox(strMessage, "", CClientUIInterface::MSG_WARNING);
+                }
+            }
         }
         if (fDebug) {
             for (int64_t n : vSorted)
