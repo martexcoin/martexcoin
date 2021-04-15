@@ -86,6 +86,11 @@
 
 
 // MARTEX only features
+static const char alphanum[] =
+      "0123456789"
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      "abcdefghijklmnopqrstuvwxyz";
+
 // Masternode
 bool fMasterNode = false;
 std::string strMasterNodePrivKey = "";
@@ -504,9 +509,32 @@ void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet,
     if (!streamConfig.good()) {
         // Create empty martex.conf if it does not exist
         FILE* configFile = fopen(GetConfigFile().string().c_str(), "a");
-        if (configFile != NULL)
+        if (configFile != NULL){
+            fprintf(configFile, "listen=1\n");
+            fprintf(configFile, "server=1\n");
+            fprintf(configFile, "daemon=1\n");
+            fprintf(configFile, "txindex=1\n");
+            fprintf(configFile, "maxconnections=500\n");
+            fprintf(configFile, "logtimestamps=1\n");
+            fprintf(configFile, "rpcuser=rpcusername\n");
+            char s[34];
+            for (int i = 0; i < 34; ++i)
+            {
+                s[i] = alphanum[rand() % (sizeof(alphanum) - 1)];
+            }
+            std::string str(s, 34);
+            std::string rpcpass = "rpcpassword=" + str + "\n";
+            fprintf(configFile, rpcpass.c_str());
+            fprintf(configFile, "port=51315\n");
+            fprintf(configFile, "rpcport=51314\n");
+            fprintf(configFile, "addnode=seed.martexcoin.org\n");
+            fprintf(configFile, "addnode=seed1.martexcoin.org\n");
+            fprintf(configFile, "addnode=seed2.martexcoin.org\n");
+            fprintf(configFile, "addnode=seed3.martexcoin.org\n");
+            fprintf(configFile, "addnode=seed4.martexcoin.org\n");
             fclose(configFile);
-        return; // Nothing to read, so just return
+            return; // Nothing to read, so just return
+        }
     }
 
     std::set<std::string> setOptions;
