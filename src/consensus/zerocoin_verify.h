@@ -11,7 +11,7 @@
 #include "zmxtchain.h"
 
 // Public coin spend
-bool RecalculatePIVSupply(int nHeightStart, bool fSkipZmxt = true);
+bool RecalculateMXTSupply(int nHeightStart, bool fSkipZmxt = true);
 bool UpdateZMXTSupply(const CBlock& block, CBlockIndex* pindex);
 
 #endif //PIVX_CONSENSUS_ZEROCOIN_VERIFY_H

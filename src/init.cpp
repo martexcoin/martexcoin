@@ -1535,7 +1535,7 @@ bool AppInit2(const std::vector<std::string>& words)
                 // Recalculate money supply for blocks that are impacted by accounting issue after zerocoin activation
                 if (GetBoolArg("-reindexmoneysupply", false)) {
                     // Recalculate from the zerocoin activation or from scratch.
-                    RecalculatePIVSupply((reindexZerocoin ? consensus.height_start_ZC : 1), false);
+                    RecalculateMXTSupply((reindexZerocoin ? consensus.height_start_ZC : 1), false);
                 }
 
                 if (!fReindex) {

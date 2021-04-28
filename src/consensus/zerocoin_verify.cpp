@@ -11,7 +11,7 @@
 #include "main.h"
 #include "txdb.h"
 
-bool RecalculatePIVSupply(int nHeightStart, bool fSkipZmxt)
+bool RecalculateMXTSupply(int nHeightStart, bool fSkipZmxt)
 {
     const Consensus::Params& consensus = Params().GetConsensus();
     const int chainHeight = chainActive.Height();
