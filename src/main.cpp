@@ -5088,7 +5088,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
             pfrom->cleanSubVer == "/MarteX Core:4.0.2.1/" || pfrom->cleanSubVer == "/MarteX Core:4.0.2.2/" || pfrom->cleanSubVer == "/MarteX Core:4.0.3.1/" ||
             pfrom->cleanSubVer == "/MarteX Core:4.0.3.2/" || pfrom->cleanSubVer == "/MarteX Core:4.0.4.3/")
         {
-            version_old = "< 5.0.2.1";
+            version_old = "< 5.0.2.2";
             // disconnect from peers older than this version
             LogPrintf("peer=%d using obsolete version %s disconnecting\n", pfrom->id, pfrom->cleanSubVer);
             pfrom->PushMessage("reject", strCommand, REJECT_OBSOLETE, strprintf("Version must be %s or greater", version_old));
