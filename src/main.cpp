@@ -127,6 +127,8 @@ static void CheckBlockIndex();
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
+//bool fNewMessageMagic = sporkManager.IsSporkActive(SPORK_21_NEW_MESSAGEMAGIC_ENFORCEMENT);
+//const std::string strMessageMagic = fNewMessageMagic ? "MarteX Signed Message:\n" : "DarkNet Signed Message:\n";
 const std::string strMessageMagic = "DarkNet Signed Message:\n";
 
 // Internal stuff
@@ -5086,9 +5088,9 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
             pfrom->cleanSubVer == "/MarteX Core:3.0.4.2/" || pfrom->cleanSubVer == "/MarteX Core:3.0.5.1/" || pfrom->cleanSubVer == "/MarteX Core:3.0.6.1/" ||
             pfrom->cleanSubVer == "/MarteX Core:4.0.0/" || pfrom->cleanSubVer == "/MarteX Core:4.0.1/" || pfrom->cleanSubVer == "/MarteX Core:4.0.2/" ||
             pfrom->cleanSubVer == "/MarteX Core:4.0.2.1/" || pfrom->cleanSubVer == "/MarteX Core:4.0.2.2/" || pfrom->cleanSubVer == "/MarteX Core:4.0.3.1/" ||
-            pfrom->cleanSubVer == "/MarteX Core:4.0.3.2/" || pfrom->cleanSubVer == "/MarteX Core:4.0.4.3/")
+            pfrom->cleanSubVer == "/MarteX Core:4.0.3.2/" || pfrom->cleanSubVer == "/MarteX Core:4.0.4.3/" || pfrom->cleanSubVer == "/MarteX Core:5.0.2.1/")
         {
-            version_old = "< 5.0.2.2";
+            version_old = "< 5.0.2.3";
             // disconnect from peers older than this version
             LogPrintf("peer=%d using obsolete version %s disconnecting\n", pfrom->id, pfrom->cleanSubVer);
             pfrom->PushMessage("reject", strCommand, REJECT_OBSOLETE, strprintf("Version must be %s or greater", version_old));
@@ -5854,8 +5856,11 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
 int ActiveProtocol()
 {
     // SPORK_15 is used for 70211 (v5.0+)
-    if (sporkManager.IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT))
+    if (sporkManager.IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT) && !sporkManager.IsSporkActive(SPORK_21_NEW_MESSAGEMAGIC_ENFORCEMENT))
             return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
+
+    if (sporkManager.IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT) && sporkManager.IsSporkActive(SPORK_21_NEW_MESSAGEMAGIC_ENFORCEMENT))
+            return MIN_PEER_PROTO_VERSION_AFTER_NEWMESSAGEMAGIC;
 
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 }

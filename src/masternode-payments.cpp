@@ -319,11 +319,6 @@ bool IsBlockPayeeValid(const CBlock& block, int nBlockHeight)
     // votes (status = TrxValidationStatus::VoteThreshold) for a finalized budget were found
     // In all cases a masternode will get the payment for this block
 
-    //check for masternode payee
-    if (masternodePayments.IsTransactionValid(txNew, nBlockHeight))
-        return true;
-    LogPrint("masternode","Invalid mn payment detected %s\n", txNew.ToString().c_str());
-
     if(IsEcoFundBlock(nBlockHeight)) {
         CScript treasuryPayee = Params().GetEcoFundScriptAtHeight(nBlockHeight);
         CAmount treasuryAmount = GetBlockValue(nBlockHeight);
