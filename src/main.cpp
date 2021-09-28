@@ -127,9 +127,7 @@ static void CheckBlockIndex();
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-//bool fNewMessageMagic = sporkManager.IsSporkActive(SPORK_21_NEW_MESSAGEMAGIC_ENFORCEMENT);
-//const std::string strMessageMagic = fNewMessageMagic ? "MarteX Signed Message:\n" : "DarkNet Signed Message:\n";
-const std::string strMessageMagic = "DarkNet Signed Message:\n";
+const std::string strMessageMagic = "MarteX Signed Message:\n";
 
 // Internal stuff
 namespace
