@@ -5064,7 +5064,7 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
         // available. If not, ask the first peer connected for them.
         // TODO: Move this to an instant broadcast of the sporks.
         //bool fMissingSporks = !pSporkDB->SporkExists(SPORK_14_NEW_PROTOCOL_ENFORCEMENT) ||
-        //                      !pSporkDB->SporkExists(SPORK_15_NEW_PROTOCOL_ENFORCEMENT_2) ||
+        //                      !pSporkDB->SporkExists(SPORK_15_NEW_PROTOCOL_ENFORCEMENT) ||
         //                      !pSporkDB->SporkExists(SPORK_17_COLDSTAKING_ENFORCEMENT);
 
 	bool fMissingSporks = !pSporkDB->SporkExists(SPORK_17_COLDSTAKING_ENFORCEMENT);
@@ -5853,12 +5853,13 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-    // SPORK_15 is used for 70211 (v5.0+)
-    if (sporkManager.IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT) && !sporkManager.IsSporkActive(SPORK_21_NEW_MESSAGEMAGIC_ENFORCEMENT))
-            return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
+    // SPORK_15 is used for 70211
+    if (sporkManager.IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT))
+            return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 
-    if (sporkManager.IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT) && sporkManager.IsSporkActive(SPORK_21_NEW_MESSAGEMAGIC_ENFORCEMENT))
-            return MIN_PEER_PROTO_VERSION_AFTER_NEWMESSAGEMAGIC;
+    // SPORK_14 is used for 70212
+    if (sporkManager.IsSporkActive(SPORK_14_NEW_PROTOCOL_ENFORCEMENT))
+            return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
 
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
 }
