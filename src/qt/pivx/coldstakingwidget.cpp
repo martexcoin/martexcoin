@@ -407,7 +407,7 @@ void ColdStakingWidget::onSendClicked() {
         return;
 
     if (!walletModel->isColdStakingNetworkelyEnabled()) {
-        inform(tr("Cold Staking is disabled until the v5.1 hardfork"));
+        inform(tr("Cold Staking is disabled"));
         return;
     }
 
