@@ -1601,9 +1601,9 @@ bool IsEcoFundBlock(int nHeight)
         return false;
     else if(nHeight < nStartEcoFundBlockT && Params().NetworkID() == CBaseChainParams::TESTNET)
         return false;
-    else if((nHeight-nStartEcoFundBlockM && Params().NetworkID() == CBaseChainParams::MAIN) % nEcoFundBlockStepM == 0)
+    else if(Params().NetworkID() == CBaseChainParams::MAIN && (nHeight-nStartEcoFundBlockM % nEcoFundBlockStepM == 0))
         return true;
-    else if((nHeight-nStartEcoFundBlockT && Params().NetworkID() == CBaseChainParams::TESTNET) % nEcoFundBlockStepT == 0)
+    else if(Params().NetworkID() == CBaseChainParams::TESTNET && (nHeight-nStartEcoFundBlockT % nEcoFundBlockStepT == 0))
         return true;
     else
         return false;
