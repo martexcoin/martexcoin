@@ -82,22 +82,15 @@ bool CMasternodeConfig::read(std::string& strErr)
             return false;
         }
 
-        if (Params().NetworkID() == CBaseChainParams::MAIN) {
+        if (Params().NetworkID() == CBaseChainParams::MAIN || Params().NetworkID() == CBaseChainParams::TESTNET) {
             if (port != Params().GetDefaultPort() && !Params().AllowMultiplePorts()) {
                 strErr = _("Invalid port detected in masternode.conf") + "\n" +
                          strprintf(_("Line: %d"), linenumber) + "\n\"" + line + "\"" + "\n" +
-                         _("(must be 51315 for mainnet)");
+                         _("(must be 51315 for mainnet, must be 41315 for testnet)");
                 streamConfig.close();
                 return false;
             }
-        } else if (port == Params().GetDefaultPort()) {
-            strErr = _("Invalid port detected in masternode.conf") + "\n" +
-                     strprintf(_("Line: %d"), linenumber) + "\n\"" + line + "\"" + "\n" +
-                     _("(51315 could be used only on mainnet)");
-            streamConfig.close();
-            return false;
         }
-
 
         add(alias, ip, privKey, txHash, outputIndex);
     }

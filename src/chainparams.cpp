@@ -293,7 +293,7 @@ public:
 	vEcoFundAddress = "mvcNScAif4qiBLKyaVZxXnN2C84dxowq6d";
 
         // spork keys
-        consensus.strSporkPubKey = "0457b7cb37995c7db0e17e50e83fd1e09c2d37329a66c4296466f2d043650a4aef5d13d344e8b6fb3ae6231712a130f94cbf59d81d97d386f9e6d6177f3ac8f234";
+        consensus.strSporkPubKey = "04cff7ee668d09f694e8012299327f568acd5aa5075ef47133c4b6df318d558916989db7a012dc54b17a48ed63364fc18c09e2c878355e07a1745956649224a7ab";
 
         // height-based activations
         consensus.height_last_PoW = 250;

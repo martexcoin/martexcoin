@@ -67,6 +67,10 @@ using namespace boost;
  * Global state
  */
 
+int nStartEcoFundBlockM = 2500001;
+int nStartEcoFundBlockT = 261;
+int nEcoFundBlockStep = 10900;
+
 /** Old subversions **/
 std::string version_old;
 
@@ -1590,14 +1594,15 @@ int static randreward()
     return rand1;
 }
 
-int nStartEcoFundBlock = 2500001;
-int nEcoFundBlockStep = 10900;
-
 bool IsEcoFundBlock(int nHeight)
 {
-    if(nHeight < nStartEcoFundBlock)
+    if(nHeight < nStartEcoFundBlockM && Params().NetworkID() == CBaseChainParams::MAIN)
         return false;
-    else if( (nHeight-nStartEcoFundBlock) % nEcoFundBlockStep == 0)
+    else if(nHeight < nStartEcoFundBlockT && Params().NetworkID() == CBaseChainParams::TESTNET)
+        return false;
+    else if((nHeight-nStartEcoFundBlockM && Params().NetworkID() == CBaseChainParams::MAIN) % nEcoFundBlockStep == 0)
+        return true;
+    else if((nHeight-nStartEcoFundBlockT && Params().NetworkID() == CBaseChainParams::TESTNET) % nEcoFundBlockStep == 0)
         return true;
     else
         return false;
@@ -1662,7 +1667,11 @@ int64_t GetBlockValue(int nHeight)
        nSubsidy = nBlockReward;
     }
 
-    if(nHeight >= 2500001 && !IsEcoFundBlock(nHeight)) {
+    if(nHeight >= nStartEcoFundBlockM && !IsEcoFundBlock(nHeight) && Params().NetworkID() == CBaseChainParams::MAIN) {
+        nSubsidy = nBlockReward / 100 * 90;
+    }
+
+    if(nHeight >= nStartEcoFundBlockT && !IsEcoFundBlock(nHeight) && Params().NetworkID() == CBaseChainParams::TESTNET) {
         nSubsidy = nBlockReward / 100 * 90;
     }
 
