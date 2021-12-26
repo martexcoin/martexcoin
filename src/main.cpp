@@ -69,7 +69,8 @@ using namespace boost;
 
 int nStartEcoFundBlockM = 2500001;
 int nStartEcoFundBlockT = 261;
-int nEcoFundBlockStep = 10900;
+int nEcoFundBlockStepM = 10900;
+int nEcoFundBlockStepT = 50;
 
 /** Old subversions **/
 std::string version_old;
@@ -1600,9 +1601,9 @@ bool IsEcoFundBlock(int nHeight)
         return false;
     else if(nHeight < nStartEcoFundBlockT && Params().NetworkID() == CBaseChainParams::TESTNET)
         return false;
-    else if((nHeight-nStartEcoFundBlockM && Params().NetworkID() == CBaseChainParams::MAIN) % nEcoFundBlockStep == 0)
+    else if((nHeight-nStartEcoFundBlockM && Params().NetworkID() == CBaseChainParams::MAIN) % nEcoFundBlockStepM == 0)
         return true;
-    else if((nHeight-nStartEcoFundBlockT && Params().NetworkID() == CBaseChainParams::TESTNET) % nEcoFundBlockStep == 0)
+    else if((nHeight-nStartEcoFundBlockT && Params().NetworkID() == CBaseChainParams::TESTNET) % nEcoFundBlockStepT == 0)
         return true;
     else
         return false;
@@ -1677,7 +1678,12 @@ int64_t GetBlockValue(int nHeight)
 
     if(IsEcoFundBlock(nHeight)) {
         LogPrintf("GetBlockValue(): this is a ecofund block\n");
-        nSubsidy = ((nBlockReward * 10900) / 100) * 20;
+	if(Params().NetworkID() == CBaseChainParams::MAIN){
+	        nSubsidy = ((nBlockReward * nEcoFundBlockStepM) / 100) * 20;
+	}
+	if(Params().NetworkID() == CBaseChainParams::TESTNET){
+	        nSubsidy = ((nBlockReward * nEcoFundBlockStepT) / 100) * 20;
+	}
     }
 
     return nSubsidy;
