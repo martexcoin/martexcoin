@@ -477,6 +477,10 @@ RES_ICONS = \
   qt/pivx/res/img/ic-transaction-sent-inactive.svg \
   qt/pivx/res/img/dark/ic-transaction-sent.svg \
   qt/pivx/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/pivx/res/img/ic-transaction-burn.svg \
+  qt/pivx/res/img/ic-transaction-burn-inactive.svg \
+  qt/pivx/res/img/dark/ic-transaction-burn.svg \
+  qt/pivx/res/img/dark/ic-transaction-burn-inactive.svg \
   qt/pivx/res/img/img-welcome-step2.png \
   qt/pivx/res/img/ic-check-dark.svg \
   qt/pivx/res/img/ic-mint.svg \
