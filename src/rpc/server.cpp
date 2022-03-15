@@ -351,9 +351,9 @@ static const CRPCCommand vRPCCommands[] =
         {"hidden", "invalidateblock", &invalidateblock, true, true, false},
         {"hidden", "reconsiderblock", &reconsiderblock, true, true, false},
         {"hidden", "setmocktime", &setmocktime, true, false, false},
-        { "hidden",             "waitfornewblock",        &waitfornewblock,        true,  true,  false  },
-        { "hidden",             "waitforblock",           &waitforblock,           true,  true,  false  },
-        { "hidden",             "waitforblockheight",     &waitforblockheight,     true,  true,  false  },
+        {"hidden", "waitfornewblock",        &waitfornewblock,        true,  true,  false  },
+        {"hidden", "waitforblock",           &waitforblock,           true,  true,  false  },
+        {"hidden", "waitforblockheight",     &waitforblockheight,     true,  true,  false  },
 
         /* MARTEX features */
         {"martex", "listmasternodes", &listmasternodes, true, true, false},
@@ -387,6 +387,7 @@ static const CRPCCommand vRPCCommands[] =
 
 #ifdef ENABLE_WALLET
         /* Wallet */
+	{"wallet", "burn", &burn, true, false, false}, /* uses wallet if enabled */
         {"wallet", "addmultisigaddress", &addmultisigaddress, true, false, true},
         {"wallet", "autocombinerewards", &autocombinerewards, false, false, true},
         {"wallet", "backupwallet", &backupwallet, true, false, true},
