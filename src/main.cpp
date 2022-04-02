@@ -5101,9 +5101,10 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
             pfrom->cleanSubVer == "/MarteX Core:3.0.4.2/" || pfrom->cleanSubVer == "/MarteX Core:3.0.5.1/" || pfrom->cleanSubVer == "/MarteX Core:3.0.6.1/" ||
             pfrom->cleanSubVer == "/MarteX Core:4.0.0/" || pfrom->cleanSubVer == "/MarteX Core:4.0.1/" || pfrom->cleanSubVer == "/MarteX Core:4.0.2/" ||
             pfrom->cleanSubVer == "/MarteX Core:4.0.2.1/" || pfrom->cleanSubVer == "/MarteX Core:4.0.2.2/" || pfrom->cleanSubVer == "/MarteX Core:4.0.3.1/" ||
-            pfrom->cleanSubVer == "/MarteX Core:4.0.3.2/" || pfrom->cleanSubVer == "/MarteX Core:4.0.4.3/" || pfrom->cleanSubVer == "/MarteX Core:5.0.2.1/")
+            pfrom->cleanSubVer == "/MarteX Core:4.0.3.2/" || pfrom->cleanSubVer == "/MarteX Core:4.0.4.3/" || pfrom->cleanSubVer == "/MarteX Core:4.0.3.1/" ||
+            pfrom->cleanSubVer == "/MarteX Core:5.0.2.1/" || pfrom->cleanSubVer == "/MarteX Core:5.0.2.2/" || pfrom->cleanSubVer == "/MarteX Core:5.0.2.3/")
         {
-            version_old = "< 5.0.2.3";
+            version_old = "< 5.0.2.5";
             // disconnect from peers older than this version
             LogPrintf("peer=%d using obsolete version %s disconnecting\n", pfrom->id, pfrom->cleanSubVer);
             pfrom->PushMessage("reject", strCommand, REJECT_OBSOLETE, strprintf("Version must be %s or greater", version_old));
@@ -5868,12 +5869,12 @@ bool static ProcessMessage(CNode* pfrom, std::string strCommand, CDataStream& vR
 //       it was the one which was commented out
 int ActiveProtocol()
 {
-    // SPORK_15 is used for 70211
-    if (sporkManager.IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT))
-            return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
-
     // SPORK_14 is used for 70212
     if (sporkManager.IsSporkActive(SPORK_14_NEW_PROTOCOL_ENFORCEMENT))
+            return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
+
+    // SPORK_15 is used for 70213
+    if (sporkManager.IsSporkActive(SPORK_15_NEW_PROTOCOL_ENFORCEMENT))
             return MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT;
 
     return MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT;
