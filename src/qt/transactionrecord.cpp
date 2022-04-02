@@ -214,6 +214,9 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet* 
                     // Sent to MARTEX Address
                     sub.type = TransactionRecord::SendToAddress;
                     sub.address = CBitcoinAddress(address).ToString();
+                } else if (txout.scriptPubKey.IsUnspendable()) {
+                    // Transaction contains an unspendable burn (likely OP_RETURN)
+                    sub.type = TransactionRecord::Burned;
                 } else {
                     // Sent to IP, or other non-address transaction like OP_EVAL
                     sub.type = TransactionRecord::SendToOther;

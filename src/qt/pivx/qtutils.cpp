@@ -146,6 +146,7 @@ void setSortTxTypeFilter(QComboBox* filter, SortEdit* lineEditType) {
     filter->addItem(filter->tr("All"), TransactionFilterProxy::ALL_TYPES);
     filter->addItem(filter->tr("Received"), TransactionFilterProxy::TYPE(TransactionRecord::RecvWithAddress) | TransactionFilterProxy::TYPE(TransactionRecord::RecvFromOther));
     filter->addItem(filter->tr("Sent"), TransactionFilterProxy::TYPE(TransactionRecord::SendToAddress) | TransactionFilterProxy::TYPE(TransactionRecord::SendToOther));
+    filter->addItem(filter->tr("Burned"), TransactionFilterProxy::TYPE(TransactionRecord::Burned));
     filter->addItem(filter->tr("Mined"), TransactionFilterProxy::TYPE(TransactionRecord::Generated));
     filter->addItem(filter->tr("Stakes"), TransactionFilterProxy::TYPE(TransactionRecord::StakeMint));
     filter->addItem(filter->tr("SuperStakes"), TransactionFilterProxy::TYPE(TransactionRecord::SuperStake));
