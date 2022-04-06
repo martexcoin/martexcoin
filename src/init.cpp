@@ -27,7 +27,6 @@
 #include "masternode-budget.h"
 #include "masternode-payments.h"
 #include "masternodeconfig.h"
-#include "forgeman.h"
 #include "masternodeman.h"
 #include "messagesigner.h"
 #include "miner.h"
@@ -386,7 +385,6 @@ std::string HelpMessage(HelpMessageMode mode)
     strUsage += HelpMessageOpt("-blocksizenotify=<cmd>", _("Execute command when the best block changes and its size is over (%s in cmd is replaced by block hash, %d with the block size)"));
     strUsage += HelpMessageOpt("-checkblocks=<n>", strprintf(_("How many blocks to check at startup (default: %u, 0 = all)"), 500));
     strUsage += HelpMessageOpt("-conf=<file>", strprintf(_("Specify configuration file (default: %s)"), "martex.conf"));
-    strUsage += HelpMessageOpt("-forgeconf=<file>", strprintf(_("Specify Forge configuration file (default: %s)"), "forge.conf"));
     if (mode == HMM_BITCOIND) {
 #if !defined(WIN32)
         strUsage += HelpMessageOpt("-daemon", _("Run in the background as a daemon and accept commands"));
@@ -1943,20 +1941,6 @@ bool AppInit2(const std::vector<std::string>& words)
         return false;
     }
 
-    // ********************************************************* Step 11: Lock Forge items
-
-    if (pwalletMain) {
-        LOCK(pwalletMain->cs_wallet);
-        LogPrintf("Locking Forge Items:\n");
-        uint256 itemTxHash;
-        for (CForge::CForgeItem item : forgeMain.getEntries()) {
-            LogPrintf("  %s %s\n", item.getTxHash(), item.getOutputIndex());
-            itemTxHash.SetHex(item.getTxHash());
-            COutPoint outpoint = COutPoint(itemTxHash, (unsigned int) std::stoul(item.getOutputIndex().c_str()));
-            pwalletMain->LockCoin(outpoint);
-        }
-    }
-    
     // ********************************************************* Step 12: start node
 
     if (!strErrors.str().empty())

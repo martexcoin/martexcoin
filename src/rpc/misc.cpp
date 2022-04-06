@@ -19,7 +19,6 @@
 #ifdef ENABLE_WALLET
 #include "wallet/wallet.h"
 #include "wallet/walletdb.h"
-#include "forgeman.h"
 #endif
 
 #include <stdint.h>
@@ -637,41 +636,4 @@ UniValue getstakingstatus(const UniValue& params, bool fHelp)
 
 }
 
-UniValue listforgeitems(const UniValue& params, bool fHelp)
-{
-    if (fHelp || params.size() != 0)
-        throw std::runtime_error(
-            "listforgeitems\n"
-            "\nReturns an array containing the list of owned ZFIs.\n"
-
-            "\nResult:\n"
-            "[\n"
-            "  {\n"
-            "    \"name\": xxx,                       (string) the plaintext name of the ZFI\n"
-            "    \"tx\": xxx,                         (hex string) the TX hash of the ZFI\n"
-            "    \"vout\": n,                         (numeric) the vout involving the TX of the ZFI\n"
-            "  } ...\n"
-            "]\n"
-
-            "\nExamples:\n" +
-            HelpExampleCli("listforgeitems", "") + HelpExampleRpc("listforgeitems", ""));
-
-
-    if (!pwalletMain)
-        throw JSONRPCError(RPC_IN_WARMUP, "Try again after active chain is loaded");
-    {
-        LOCK2(cs_main, &pwalletMain->cs_wallet);
-        UniValue results(UniValue::VARR);
-        for (const CForge::CForgeItem& item : forgeMain.getEntries()) {
-            UniValue obj(UniValue::VOBJ);
-            obj.push_back(Pair("name", item.getName()));
-            obj.push_back(Pair("tx", item.getTxHash()));
-            obj.push_back(Pair("vout", item.getOutputIndex()));
-            results.push_back(obj);
-        }
-        return results;
-    }
-
-
-}
 #endif // ENABLE_WALLET

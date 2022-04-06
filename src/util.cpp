@@ -495,13 +495,6 @@ boost::filesystem::path GetMasternodeConfigFile()
     return pathConfigFile;
 }
 
-boost::filesystem::path GetForgeConfigFile()
-{
-    boost::filesystem::path pathConfigFile(GetArg("-forgeconf", "forge.conf"));
-    if (!pathConfigFile.is_complete()) pathConfigFile = GetDataDir() / pathConfigFile;
-    return pathConfigFile;
-}
-
 void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet,
     std::map<std::string, std::vector<std::string> >& mapMultiSettingsRet)
 {

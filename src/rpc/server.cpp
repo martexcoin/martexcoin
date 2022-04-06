@@ -450,9 +450,6 @@ static const CRPCCommand vRPCCommands[] =
         {"wallet", "delegatoradd", &delegatoradd, true, false, true},
         {"wallet", "delegatorremove", &delegatorremove, true, false, true},
 
-        /* Forge */
-        {"forge", "listforgeitems", &listforgeitems, false, false, true},
-
 #endif // ENABLE_WALLET
 };
 
